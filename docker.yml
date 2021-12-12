@@ -1,0 +1,39 @@
+---
+apt:
+  sources:
+    docker.list:
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+  # To get the latest key id if it changes in future.
+  # curl -sL https://download.docker.com/linux/ubuntu/gpg | gpg
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh-authorized-keys:
+      # - ADD you id_rsa.pub key here
+package_update: true
+packages:
+  - docker-ce
+  - docker-ce-cli
+  - avahi-daemon
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  - libnss-mdns
+# ZRAM: Only needed if you want to use zram to compress memory if low on resources e.g 8/16gb mac, enables more containers to be ran within the memory allocated to the VM
+  - linux-image-extra-virtual
+runcmd:
+  - sudo systemctl enable docker
+  - sudo systemctl enable -s HUP ssh
+  - sudo groupadd docker
+  - sudo usermod -aG docker ubuntu
+  - sudo curl -L "https://github.com/docker/compose/releases/download/v2.0.1/docker-compose-darwin-x86_64" -o /usr/local/lib/docker/cli-plugins
+  - sudo chmod +x /usr/local/lib/docker/cli-plugins 
+  - sudo curl -fL https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+# ZRAM: Only needed if you want to use zram to compress memory if low on resources e.g 8/16gb mac, enables more containers to be ran within the memory allocated to the VM
+  # - sudo apt install -y linux-image-extra-virtual
+  - git clone https://github.com/britishbadger/zram-swap.git
+  - cd zram-swap && sudo ./install.sh
+  
