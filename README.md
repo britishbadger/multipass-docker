@@ -24,11 +24,13 @@ multipass launch -c 12 -m 6G -d 60G -n docker 20.04 --cloud-init docker.yml
 ```
 
 Options:
+```
 Parameters mean the following:
 -c 	= core count
 -d 	= disk count 
 -m 	= memory 
 20.04 = version of ubuntu server to use
+```
 
 A new local vm will be provisioned and take a few minutes to start. You can whether the machine is up by running the following:
 
