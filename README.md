@@ -4,17 +4,21 @@ For me using Multipass seemed to be the easiest way to eliminate docker desktop 
 
 Any containers mapped to public ports will be accessible to http://docker.local:XXXXX (not localhost);
 
+## Install Multipass
+
 ```
 brew install multipass docker
 ``` 
 
-Run the following :
+**IMPORTANT Update docker.yml** with the contents of your id_rsa.pub file before continuing, this will ensure you can connect when using the docker cli and you can open a shell to the virtual machine that gets created.
+
+
+Optionally *ONE relevant hupervisor backend*, hyptekit is default, qemu / virtualbox are options and run the following
 
 ```
-# Chose **ONE** relevant hupervisor backend, hyptekit is default, qemu / virtualbox are options
-sudo multipass set local.driver=hyperkit
-sudo multipass set local.driver=virtualbox
-sudo multipass set local.driver=qemu
+#sudo multipass set local.driver=hyperkit
+#sudo multipass set local.driver=virtualbox
+#sudo multipass set local.driver=qemu
 
 multipass launch -c 12 -m 6G -d 60G -n docker 20.04 --cloud-init docker.yml
 ```
@@ -50,6 +54,7 @@ multipass mount /Volumes docker
 Setup a docker context which will allow the docker cli to just work as normal from a terminal
 
 ```docker context create multipass_docker --docker "host=ssh://ubuntu@docker.local"```
+
 ### Without Docker Context
 
 To run docker commands, prefix DOCKER_HOST or setup a docker context
@@ -59,6 +64,7 @@ To run docker commands, prefix DOCKER_HOST or setup a docker context
 Or add the following to your bash / zsh profile
 
 ```export DOCKER_HOST="ssh://ubuntu@docker.local"```
+
 ### Docker Desktop UI Replacement
 Replacement for Docker Desktop UI
 
@@ -72,3 +78,6 @@ Login at https://docker.local:9443/#!/2/docker/containers
  
 ### VSCode Dev-Containers
 I had issues with Ubuntu 21.04 and some of the EXA Dev Containers in use. These instructions have been updated to use 20.04 LTS version of ubuntu as the image.
+
+### ZRAM Swap
+The docker.yml contains steps that will setup zram which will compress the memory within the VM, this can be useful if you are on a machine without much resource. This can effectively double the "ram" available for starting containers. Un-comment if you'd like this enabled.
