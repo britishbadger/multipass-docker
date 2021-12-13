@@ -23,7 +23,7 @@ packages:
   - lsb-release
   - libnss-mdns
 # ZRAM: Only needed if you want to use zram to compress memory if low on resources e.g 8/16gb mac, enables more containers to be ran within the memory allocated to the VM
-  - linux-image-extra-virtual
+#  - linux-image-extra-virtual
 runcmd:
   - sudo systemctl enable docker
   - sudo systemctl enable -s HUP ssh
@@ -34,6 +34,6 @@ runcmd:
   - sudo curl -fL https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 # ZRAM: Only needed if you want to use zram to compress memory if low on resources e.g 8/16gb mac, enables more containers to be ran within the memory allocated to the VM
   # - sudo apt install -y linux-image-extra-virtual
-  - git clone https://github.com/britishbadger/zram-swap.git
-  - cd zram-swap && sudo ./install.sh
+  # - git clone https://github.com/britishbadger/zram-swap.git
+  # - cd zram-swap && sudo ./install.sh
   
