@@ -38,10 +38,10 @@ A new local vm will be provisioned and take a few minutes to start. You can whet
 
 ``` multipass list```
 
-You should also be able to ssh into the provisioned vm
+IMPORTANT : SSH into the provisioned vm and accept the certifcate.
 
 ```ssh ubuntu@docker.local```
-or 
+and 
 ```multipass shell docker```
 
 ### Docker Volumes
