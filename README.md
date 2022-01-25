@@ -57,7 +57,10 @@ multipass mount /Volumes docker
 ### Docker Context
 Setup a docker context which will allow the docker cli to just work as normal from a terminal
 
-```docker context create multipass_docker --docker "host=ssh://ubuntu@docker.local"```
+```
+export DOCKER_HOST="ssh://ubuntu@docker.local"
+docker context create multipass_docker --docker "host=ssh://ubuntu@docker.local"
+```
 
 ### Without Docker Context
 
