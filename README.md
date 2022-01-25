@@ -1,6 +1,6 @@
 ## Using Docker without Docker Desktop on MacOS
 
-For me using Multipass seemed to be the easiest way to eliminate docker desktop as a mac user. Multipass will enable you to create a small vm (like docker desktop) that you’ll use the docker cli/tools to connect and issue docker commands. Docker-compose (on the host) works exactly as before.
+For me using Multipass seemed to be the easiest way to eliminate docker desktop as a mac user. Multipass will enable you to create a small virtual machine (like docker desktop) that you’ll use the docker cli/tools to connect to and issue docker commands. Docker-compose (on the host) works exactly as before.
 
 Any containers mapped to public ports will be accessible to http://docker.local:XXXXX (not localhost);
 
@@ -10,16 +10,18 @@ Any containers mapped to public ports will be accessible to http://docker.local:
 brew install multipass docker
 ``` 
 
-**IMPORTANT Update docker.yml** with the contents of your id_rsa.pub file before continuing, this will ensure you can connect when using the docker cli and you can open a shell to the virtual machine that gets created.
+**IMPORTANT Update docker.yml** with the contents of your id_rsa.pub (from your .ssh folder) file before continuing, this will ensure you can connect when using the docker cli and you can open a shell to the virtual machine that gets created.
 
-
-Optionally *ONE relevant hupervisor backend*, hyptekit is default, qemu / virtualbox are options and run the following
+The default virtualization backend is hyperkit, to change the default, use one of the following commands:
 
 ```
 #sudo multipass set local.driver=hyperkit
 #sudo multipass set local.driver=virtualbox
 #sudo multipass set local.driver=qemu
+```
 
+To initialise the vm with docker installed, run the following. The options are explained below.
+```
 multipass launch -c 12 -m 6G -d 60G -n docker 20.04 --cloud-init docker.yml
 ```
 
@@ -43,7 +45,7 @@ or
 ```multipass shell docker```
 
 ### Docker Volumes
-Run the following to ensure the VM can reach areas of you disk that Docker Desktop would normally make available. This is important if you want to use mounts.
+Run the following to ensure the VM can reach areas of you disk that Docker Desktop would normally make available. This is important if you want to use volume mounts.
 
 ```
 mutlipass mount /Users docker
