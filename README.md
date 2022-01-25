@@ -60,6 +60,7 @@ Setup a docker context which will allow the docker cli to just work as normal fr
 ```
 export DOCKER_HOST="ssh://ubuntu@docker.local"
 docker context create multipass_docker --docker "host=ssh://ubuntu@docker.local"
+docker context use multipass_docker
 ```
 
 ### Without Docker Context
