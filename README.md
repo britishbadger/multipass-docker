@@ -48,7 +48,7 @@ or
 Run the following to ensure the VM can reach areas of you disk that Docker Desktop would normally make available. This is important if you want to use volume mounts.
 
 ```
-mutlipass mount /Users docker
+multipass mount /Users docker
 multipass mount /tmp docker
 multipass mount /private docker
 multipass mount /Volumes docker
