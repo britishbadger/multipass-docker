@@ -1,13 +1,13 @@
 ## Using Docker without Docker Desktop on MacOS
 
-For me using Multipass seemed to be the easiest way to eliminate docker desktop as a mac user. Multipass will enable you to create a small virtual machine (like docker desktop) that you’ll use the docker cli/tools to connect to and issue docker commands. Docker-compose (on the host) works exactly as before.
+For me using Multipass seemed to be the easiest way to eliminate docker desktop as a mac user. Multipass will enable you to create a small virtual machine (like docker desktop) that you’ll use the docker cli/tools to connect to and issue docker commands. 
 
 Any containers mapped to public ports will be accessible to http://docker.local:XXXXX (not localhost);
 
-## Install Multipass
+## Install Multipass, docker cli and docker-compose
 
 ```
-brew install multipass docker
+brew install multipass docker docker-compose
 ``` 
 
 **IMPORTANT Update docker.yml** with the contents of your id_rsa.pub (from your .ssh folder) file before continuing, this will ensure you can connect when using the docker cli and you can open a shell to the virtual machine that gets created.
