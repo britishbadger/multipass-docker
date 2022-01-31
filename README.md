@@ -49,6 +49,8 @@ Run the following to ensure the VM can reach areas of you disk that Docker Deskt
 
 ```
 multipass mount /Users docker
+
+# NOTE : Probably optional, better performance without mounting these as it give sshfs less work todo.
 multipass mount /tmp docker
 multipass mount /private docker
 multipass mount /Volumes docker
